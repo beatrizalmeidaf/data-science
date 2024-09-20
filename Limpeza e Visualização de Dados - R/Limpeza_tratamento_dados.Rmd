@@ -1,0 +1,71 @@
+---
+title: "Limpeza e Tratamento"
+output: html_notebook
+---
+
+```{r}
+dados = read.csv("dados.csv", sep=";", na.strings = "", stringsAsFactors = T)
+dados
+
+```
+
+```{r}
+head(dados)
+summary(dados)
+```
+```{r}
+summary(dados$PIB)
+summary(dados$VALOREMPENHO)
+```
+```{r}
+boxplot(dados$PIB, main="Valores PIB", col = brewer.pal(n=3, name="Paired"), outline = F) #main é o titulo, col é a cor que usamos
+#brewer.pal é uma função que retorna uma sequência de cores harmoniosas. O argumento n = 3 significa que você quer 3 cores da paleta.name = "Paired" indica o nome da paleta de cores 
+
+boxplot(dados$VALOREMPENHO, main="Valores Empenho", col = brewer.pal(n=3, name = "Pastel1"), outline = F)
+
+hist(dados$PIB, main = "PIB", col = brewer.pal(n=3, name = "Paired"), xlab = "Valores" ,outline=F)
+hist(dados$VALOREMPENHO, main="Empenho", col = brewer.pal(n=3, name = "Pastel1"), outline = F, xlab = "Valores")
+```
+```{r}
+#achar melhores EMPENHOS
+
+Mempenho = head(dados[order(-dados$VALOREMPENHO),], 10) #ordenha em ordem DECRESCENTE e seleciona os dez primeiros registros
+
+barplot(Mempenho$VALOREMPENHO, col = brewer.pal(n=10, name = "RdBu"), las=2, main ="Maiores Empenhos") #coluna do Mempenho
+
+
+#adicionar legenda ao gráfico
+legend("topright", legend = Mempenho$MUNICIPIO, col = brewer.pal(n=10, name = "RdBu"), lty = 1:2, cex = 0.8, ncol = 2, lwd = 4)
+
+#lty define tipo ed linha usado
+#cex ajusta tamanho texto na legenda, no caso foi 80% do tamanho normal
+#ncol faz com que a legenda tenha duas colunas
+#lwd define largura das linhas na legenda
+
+box()
+```
+```{r} 
+#maiores PIBS
+Mpibs = head(dados[order(-dados$PIB),], 10)
+
+barplot(Mpibs$PIB, main = "Maiores PIBs", col = brewer.pal(n=10, name = "Spectral"), las=2)
+
+legend("topright", legend = Mpibs$MUNICIPIO, col = brewer.pal(n = 10, name = "Spectral"), lty=1:2, cex=0.8, ncol = 2,lwd=4)
+
+box()
+```
+
+
+```{r}
+#Relação entre PIB e empenho
+#Calcula qual % de PIB foi empenhado
+
+
+dados$PROPORCAO = dados$VALOREMPENHO / dados$PIB #ajuda a entender qual porcentagem do PIB está sendo utilizada para cumprir compromissos financeiros, como contratos, obras públicas, ou despesas governamentais.
+
+Mprop = head(dados[order(-dados$PROPORCAO), ], 10)
+barplot(Mprop$PROPORCAO, main = "Maiores proporções", col=brewer.pal(n = 10, name = "Paired"),las=2 )
+legend("topright", Mprop$MUNICIPIO, col = brewer.pal(n = 10, name = "Paired"), lty=1:2, cex=0.8, ncol = 2,lwd=4)
+box()
+```
+
