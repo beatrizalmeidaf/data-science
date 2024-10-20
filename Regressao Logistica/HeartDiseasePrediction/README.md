@@ -1,82 +1,90 @@
-```markdown
-# Projeto de Previsão de Doença Cardíaca com Regressão Logística
+# Previsão de Doença Cardíaca
 
-## Descrição do Projeto
+## Descrição
+Este projeto visa desenvolver um modelo de previsão de doença cardíaca utilizando Regressão Logística. O modelo é treinado em um conjunto de dados que contém informações sobre fatores de risco associados a doenças cardíacas. O objetivo principal é prever a probabilidade de um paciente desenvolver uma doença cardíaca com base em suas características.
 
-Este projeto visa construir um modelo de aprendizado de máquina para prever a presença de doença cardíaca usando um conjunto de dados chamado "Framingham Heart Study". A previsão é feita utilizando Regressão Logística, que é um algoritmo de classificação binária. O objetivo principal é prever a probabilidade de um paciente desenvolver doença cardíaca dentro de um período de 10 anos, com base em características como idade, gênero, hábito de fumar, pressão arterial, entre outros.
+## Objetivos
+- Desenvolver um modelo preditivo que classifique pacientes com base na presença ou ausência de doenças cardíacas.
+- Avaliar a precisão do modelo utilizando métricas apropriadas, como matriz de confusão e acurácia.
 
-## Ferramentas e Bibliotecas Utilizadas
+## Ferramentas Utilizadas
+- **Python**: Linguagem de programação utilizada para desenvolver o modelo.
+- **Pandas**: Biblioteca para manipulação de dados.
+- **Scikit-learn**: Biblioteca para aprendizado de máquina, usada para modelagem e avaliação.
+- **Matplotlib**: Biblioteca para visualização de dados (embora não utilizada neste código, é comum em projetos de ciência de dados).
+- **NumPy**: Biblioteca para manipulação de arrays e operações matemáticas.
 
-- **Pandas**: Para manipulação e análise de dados.
-- **NumPy**: Para operações numéricas e manipulação de arrays.
-- **Scikit-Learn**: Para implementação de algoritmos de aprendizado de máquina, divisão do conjunto de dados e métricas de avaliação.
-- **Matplotlib**: Para visualização gráfica (não utilizado diretamente no código, mas útil para possíveis melhorias e análises futuras).
+## Dados
+O conjunto de dados utilizado é o **Framingham Heart Study**, que contém as seguintes colunas:
 
-## Estrutura do Dataset
-
-O dataset contém as seguintes colunas (features):
-- `male`: Gênero do paciente (1 = masculino, 0 = feminino)
+- `male`: Sexo do paciente (0 = feminino, 1 = masculino)
 - `age`: Idade do paciente
-- `education`: Nível de educação
-- `currentSmoker`: Se o paciente é fumante atual (1 = sim, 0 = não)
+- `education`: Nível educacional
+- `currentSmoker`: Indica se o paciente é fumante (0 = não, 1 = sim)
 - `cigsPerDay`: Número de cigarros fumados por dia
-- `BPMeds`: Se o paciente está tomando medicamentos para pressão arterial
-- `prevalentStroke`: Se o paciente já teve um AVC
-- `prevalentHyp`: Se o paciente tem hipertensão
-- `diabetes`: Se o paciente tem diabetes
+- `BPMeds`: Uso de medicamentos para pressão arterial (0 = não, 1 = sim)
+- `prevalentStroke`: Histórico de AVC (0 = não, 1 = sim)
+- `prevalentHyp`: Hipertensão prévia (0 = não, 1 = sim)
+- `diabetes`: Histórico de diabetes (0 = não, 1 = sim)
 - `totChol`: Colesterol total
 - `sysBP`: Pressão arterial sistólica
 - `diaBP`: Pressão arterial diastólica
 - `BMI`: Índice de Massa Corporal
 - `heartRate`: Frequência cardíaca
 - `glucose`: Nível de glicose
-- `TenYearCHD`: Indicador da presença de doença cardíaca em 10 anos (1 = sim, 0 = não)
+- `TenYearCHD`: Indica se o paciente desenvolveu doença cardíaca em 10 anos (0 = não, 1 = sim)
 
-## Pré-Processamento de Dados
-
-1. **Carregamento do Dataset**: O dataset foi carregado a partir de um arquivo CSV.
-2. **Tratamento de Valores Faltantes**: Foram removidas as linhas que continham valores faltantes (`NaN`).
-3. **Separação de Features e Labels**: As colunas de características (features) foram separadas da variável alvo (`TenYearCHD`).
-4. **Divisão de Treino e Teste**: O dataset foi dividido em 80% para treinamento e 20% para teste.
-
-## Implementação do Modelo
-
-1. **Modelo Utilizado**: Regressão Logística
-2. **Treinamento**: O modelo foi treinado usando os dados de treino.
-3. **Previsão**: O modelo faz previsões de classes e probabilidades de doença para os dados de teste.
-
-## Avaliação do Modelo
-
-### Matriz de Confusão
-
-A matriz de confusão é utilizada para avaliar o desempenho do modelo, comparando as previsões com os valores reais:
-- **TN (True Negatives)**: Número de previsões corretas para pacientes sem a doença.
-- **FP (False Positives)**: Número de previsões incorretas indicando presença de doença (falsos positivos).
-- **FN (False Negatives)**: Número de previsões incorretas indicando ausência de doença (falsos negativos).
-- **TP (True Positives)**: Número de previsões corretas para pacientes com a doença.
-
-### Métricas
-
-- **Acurácia**: Proporção de previsões corretas feitas pelo modelo.
-
-## Resultados
-
-- **Acurácia do Modelo**: 85,5%
-- **Exemplo de Previsões**:
-  - Previsões de Classes: `[0, 1, 0]` (0 = sem doença, 1 = com doença)
-  - Probabilidades: `[[0.85, 0.15], [0.30, 0.70], [0.95, 0.05]]`
+### Observações
+- O conjunto de dados pode conter valores ausentes (NaN), que são removidos antes da modelagem.
+- As colunas de características (features) e a variável alvo (target) são separadas para treinamento do modelo.
 
 ## Execução do Código
 
-1. Certifique-se de ter as bibliotecas necessárias instaladas:
-   ```bash
-   pip install pandas numpy scikit-learn matplotlib
-   ```bash
-2. Execute o script Python fornecendo o dataset `framingham_heart_disease.csv` no mesmo diretório.
-
-## Melhorias Futuras
-
-- **Escalonamento de Dados**: Normalizar os dados para melhorar a performance e a convergência do modelo.
-- **Hiperparâmetros**: Ajustar hiperparâmetros como `max_iter` e experimentar diferentes algoritmos de classificação.
-- **Visualização**: Adicionar gráficos para uma melhor interpretação dos dados e resultados.
+### 1. Importação de Bibliotecas
+```python
+import pandas as pd
+import sklearn.model_selection as ms
+import numpy as np
+from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.linear_model import LogisticRegression
 ```
+
+### 2. Carregamento do Conjunto de Dados
+```python
+dataset = pd.read_csv("framingham_heart_disease.csv")
+dataset = dataset.dropna()
+```
+
+### 3. Preparação dos Dados
+```python
+X = dataset.iloc[:, :-1].values
+y = dataset.iloc[:, -1].values
+X_train, X_test, y_train, y_test = ms.train_test_split(X, y, test_size=1/5, random_state=0)
+```
+
+### 4. Treinamento do Modelo
+```python
+classifier = LogisticRegression()
+classifier.fit(X_train, y_train)
+```
+
+### 5. Previsão e Avaliação
+```python
+y_pred = classifier.predict(X_test)
+cm = confusion_matrix(y_test, y_pred)
+accuracy = accuracy_score(y_test, y_pred)
+```
+
+## Resultados
+- A matriz de confusão fornece uma visão detalhada sobre o desempenho do modelo, mostrando os verdadeiros positivos (TP), verdadeiros negativos (TN), falsos positivos (FP) e falsos negativos (FN).
+- A acurácia do modelo é calculada para verificar a proporção de previsões corretas.
+
+### Exemplo de Previsão
+```python
+# Prever a classe de um novo paciente
+predict = classifier.predict([[1, 30, 4, 0, 0, 0, 0, 0, 0, 195, 130, 70, 80, 20, 56]])
+print(predict)  # Resultado: [0] (não tem a doença)
+```
+
+## Considerações Finais
+O modelo desenvolvido é um primeiro passo na análise preditiva de doenças cardíacas. Melhorias podem incluir o ajuste de hiperparâmetros, a utilização de outros algoritmos de aprendizado de máquina e a implementação de técnicas de validação cruzada para melhorar a robustez das previsões.
