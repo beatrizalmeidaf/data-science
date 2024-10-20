@@ -1,5 +1,3 @@
-## README.md
-
 # Análise e Tratamento de Dados Meteorológicos
 
 Este projeto tem como objetivo realizar a análise e tratamento de dados meteorológicos, utilizando bibliotecas populares para manipulação, visualização e aplicação de técnicas estatísticas. O foco é explorar os dados, identificar inconsistências, preencher valores ausentes e corrigir possíveis anomalias nos dados.
